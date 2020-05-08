@@ -1,0 +1,116 @@
+@charset "UTF-8";
+@import "./common";
+/*重置外部引用样式*/
+
+//form表单
+.el-form--label-top {
+    .el-form-item__label {
+        line-height: 30px;
+        padding: 0;
+    }
+    .el-form-item {
+        margin-bottom: 10px;
+    }
+}
+.search-card {
+    margin-bottom: 20px;
+    .el-card__body {
+        padding: 30px 20px 12px;
+    }
+}
+.search-form {
+    .el-form-item__label {
+        width: 100px;
+    }
+    .btn-item {
+       padding-left: 100px;
+    }
+}
+
+.el-form-item {
+    .el-form-item {
+        margin: 0;
+    }
+}
+
+//对话框
+.dialog-wrap{
+    .el-dialog__header {
+        padding: 15px 20px;
+        text-align: center;
+        border-bottom: 1px solid $neut4;
+    }
+    .el-form {
+        padding: 0 60px;
+    }
+    .el-dialog__footer {
+        padding: 15px 20px;
+        border-top: 1px solid $neut4;
+    }
+}
+
+/*应用级样式*/
+
+//公共样式
+.link-blue{
+    color: $primary;
+    &:hover {
+        color: darken($primary, 10%)
+    }
+}
+
+//主要内容页
+.page-main{
+    height: 100%;
+    position: relative;
+    padding: 0px 20px;
+    .header{
+        text-align: center;
+        height: 40px;
+        line-height: 40px;
+    }
+    .info-box{
+        background-color: $primary;
+        padding:10px 15px;
+    }
+}
+
+.el-card {
+    .card-header {
+        height: 40px;
+        line-height: 40px;
+        position: relative;
+    
+        .card-header-title {
+            font-weight: 700;
+            font-style: normal;
+            font-size: 22px;
+            color: #4FAFA2;
+        }
+    }
+
+    .card-title {
+        font-weight: 700;
+        font-style: normal;
+        color: #53BCF5;
+        margin-bottom: 10px;
+    }
+}
+
+.date-filter {
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 10px;
+
+    .filter-item {
+        padding: 8px 30px;
+        border: 1px solid $neut4;
+        margin-right: 15px;
+        border-radius: 3px;
+    }
+}
+
+.pagination {
+    text-align: right;
+    margin-top: 10px;
+}

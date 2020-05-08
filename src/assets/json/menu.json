@@ -1,0 +1,10 @@
+{
+    "index": {
+        "type": "item",
+        "parentCode": "",
+        "menuCode": "index",
+        "menuName": "系统首页",
+        "menuIcon": "el-icon-s-grid",
+        "subMenus": []
+    }
+}
