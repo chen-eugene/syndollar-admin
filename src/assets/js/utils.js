@@ -1,3 +1,6 @@
+import md5 from 'md5'
+import moment from 'moment'
+
 // 添加cookie
 export const addCookie = (name, value, expiresHours) => {
     let cookieString = name + '=' + escape(value) + '; path=/'
@@ -40,4 +43,23 @@ export const removeKey = key => {
 
 export const isEmptyObject = obj => {
     return JSON.stringify(obj) === '{}'
+}
+
+export const encrypt = (str) => {
+    return md5('123' + str)
+}
+
+// 格式化金钱
+export const formatMoney = function (number) {
+    if (!number) return 0
+    try {
+        return parseFloat(number).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    } catch (error) {
+        return '-'
+    }
+}
+
+// 格式化日期
+export const formatDate = function (date, fmt = 'YYYY-MM-DD') {
+    return moment(date).format(fmt)
 }

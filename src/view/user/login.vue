@@ -57,7 +57,7 @@ export default {
     },
 
     methods: {
-        ...mapActions('user', ['userLoginX', 'userProfileX']),
+        ...mapActions('user', ['userLoginX']),
 
         async submitForm () {
             const valid = await this.$refs['form'].validate()
@@ -65,11 +65,13 @@ export default {
             this.isLoading = true
             const response = await this.userLoginX(this.form)
             this.isLoading = false
-            if (response.code === 0) {
-                await this.userProfileX(true)
+            if (response.code === 200) {
                 this.$router.push('/')
             } else {
-                this.$message.error(response.msg)
+                this.$message({
+                    type: 'error',
+                    message: response.msg
+                })
             }
         }
     }

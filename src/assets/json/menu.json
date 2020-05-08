@@ -2,9 +2,9 @@
     "index": {
         "type": "item",
         "parentCode": "",
-        "menuCode": "index",
-        "menuName": "系统首页",
-        "menuIcon": "el-icon-s-grid",
+        "menuCode": "employ",
+        "menuName": "员工管理",
+        "menuIcon": "el-icon-s-custom",
         "subMenus": []
     }
 }
