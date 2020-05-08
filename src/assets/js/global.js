@@ -1,4 +1,4 @@
-import { formatDate, formatMoney, getCookie, deleteCookie, addCookie, getKey, setKey, removeKey } from './utils'
+import { formatDate, formatMoney, getCookie, deleteCookie, addCookie, getKey, setKey, removeKey, encrypt } from './utils'
 
 export default {
     install (Vue) {
@@ -21,6 +21,7 @@ export default {
 
         Vue.prototype.$date = formatDate
         Vue.prototype.$currency = formatMoney
+        Vue.prototype.$encrypt = encrypt
 
         Vue.prototype.$cookie = {
             set: addCookie,

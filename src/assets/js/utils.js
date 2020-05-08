@@ -61,5 +61,6 @@ export const formatMoney = function (number) {
 
 // 格式化日期
 export const formatDate = function (date, fmt = 'YYYY-MM-DD') {
+    if (!date) return ''
     return moment(date).format(fmt)
 }

@@ -51,7 +51,7 @@
         <el-dialog :visible.sync="dialogVisible" width="450px" @closed="closeHandler">
             <el-form :model="form" ref="form" :rules="rules">
                 <el-form-item prop="accountId" label="登录账号">
-                    <el-input v-model="form.accountId" placeholder="请输入登录账号"></el-input>
+                    <el-input v-model="form.accountId" :disabled="!!form.userId" placeholder="请输入登录账号"></el-input>
                 </el-form-item>
 
                 <el-form-item prop="password" label="登录密码" v-if="!form.userId">
@@ -169,7 +169,7 @@ export default {
     },
 
     methods: {
-        ...mapActions('employ', ['getEmployListX', 'createEmployX']),
+        ...mapActions('employ', ['getEmployListX', 'createEmployX', 'updateEmployX', 'removeEmployX', 'resetEmployX']),
 
         search () {
             this.pagination.pageNum = 0
@@ -197,7 +197,11 @@ export default {
 
         // 新增员工
         createOps () {
+            this.resetForm()
             this.dialogVisible = true
+            this.$nextTick(() => {
+                this.$refs.form.clearValidate()
+            })
         },
 
         // 修改员工
@@ -217,7 +221,13 @@ export default {
         async createSubmit () {
             const validate = await this.$refs['form'].validate()
             if (!validate) return
-            const response = await this.createEmployX(this.form)
+            const params = Object.assign({}, this.form,  { password: this.$encrypt(this.form.password), birth: this.form.birth || undefined })
+            let response
+            if (this.form.userId) {
+                response = await this.updateEmployX(params)
+            } else {
+                response = await this.createEmployX(params)
+            }
             if (response.code === 200) {
                 this.dialogVisible = false
                 this.getEmployList()
@@ -229,16 +239,60 @@ export default {
             }
         },
 
-        remove () {
-
+        // 删除员工
+        async remove (row) {
+            const confirm = await this.$confirm('确定删除员工账号?', '警告', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            })
+            if (!confirm) return
+            const response = await this.removeEmployX({ userId: row.userId })
+            if (response.code === 200) {
+                this.dialogVisible = false
+                this.getEmployList()
+            } else {
+                this.$message({
+                    type: 'error',
+                    message: response.msg
+                })
+            }
         },
 
-        reset () {
+        // 重置账号密码
+        async reset (row) {
+            const confirm = await this.$confirm('确定将该员工密码重置为123456?', '警告', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            })
+            if (!confirm) return
+            const response = await this.resetEmployX({ userId: row.userId })
+            if (response.code === 200) {
+                this.dialogVisible = false
+                this.getEmployList()
+            } else {
+                this.$message({
+                    type: 'error',
+                    message: response.msg
+                })
+            }
+        },
 
+        resetForm () {
+            this.form.userId = ''
+            this.form.accountId = ''
+            this.form.password = ''
+            this.form.userName = ''
+            this.form.nickName = ''
+            this.form.birth = ''
+            this.form.sex = ''
+            this.form.storeRole = ''
         },
 
         closeHandler () {
-            this.$refs['form'].resetFields()
+            this.resetForm()
+            this.$refs.form.resetFields()
         }
     }
 }

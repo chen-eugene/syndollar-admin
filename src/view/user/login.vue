@@ -63,7 +63,10 @@ export default {
             const valid = await this.$refs['form'].validate()
             if (!valid) return
             this.isLoading = true
-            const response = await this.userLoginX(this.form)
+            const response = await this.userLoginX({
+                accountId: this.form.accountId,
+                password: this.$encrypt(this.form.password)
+            })
             this.isLoading = false
             if (response.code === 200) {
                 this.$router.push('/')

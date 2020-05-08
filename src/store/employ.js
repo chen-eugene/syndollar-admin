@@ -19,6 +19,18 @@ export default {
 
         createEmployX (store, params) {
             return axios.post('/employ/create', params)
+        },
+
+        updateEmployX (store, params) {
+            return axios.post('/employ/update', params)
+        },
+
+        removeEmployX (store, params) {
+            return axios.post('/employ/remove', params)
+        },
+
+        resetEmployX (store, params) {
+            return axios.post('/employ/reset', params)
         }
     }
 }
