@@ -51,7 +51,7 @@ export default {
 
 
     menuData () {
-      return [menu.index]
+      return [menu.employ, menu.dishes]
     }
   },
 

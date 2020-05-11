@@ -1,10 +1,18 @@
 {
-    "index": {
+    "employ": {
         "type": "item",
         "parentCode": "",
         "menuCode": "employ",
         "menuName": "员工管理",
         "menuIcon": "el-icon-s-custom",
+        "subMenus": []
+    },
+    "dishes": {
+        "type": "item",
+        "parentCode": "",
+        "menuCode": "dishes",
+        "menuName": "菜谱管理",
+        "menuIcon": "el-icon-dish",
         "subMenus": []
     }
 }

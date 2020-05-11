@@ -3,7 +3,7 @@
         <div slot="header" class="clearfix">
             <el-button size="small" type="primary" icon="el-icon-plus" @click="createOps">新增员工</el-button>
         </div>
-
+        
         <el-table border stripe :data="employList" size="small" v-loading="isLoading">
             <el-table-column label="登录账号" prop="accountId"/>
             <el-table-column label="员工姓名" prop="userName"/>
