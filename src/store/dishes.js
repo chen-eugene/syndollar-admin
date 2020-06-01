@@ -25,12 +25,12 @@ export default {
             return axios.post('/dishes/discount', params)
         },
 
-        removeEmployX (store, params) {
-            return axios.post('/employ/remove', params)
+        soldoutDishesX (store, params) {
+            return axios.post('/dishes/soldout', params)
         },
 
-        resetEmployX (store, params) {
-            return axios.post('/employ/reset', params)
+        removeDishesX (store, params) {
+            return axios.post('/dishes/remove', params)
         }
     }
 }
