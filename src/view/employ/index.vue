@@ -6,7 +6,7 @@
         
         <el-table border stripe :data="employList" size="small" v-loading="isLoading">
             <el-table-column label="登录账号" prop="accountId"/>
-            <el-table-column label="员工姓名" prop="userName"/>
+            <el-table-column label="员工姓名" prop="employName"/>
             <el-table-column label="员工昵称" prop="nickName"/>
             <el-table-column label="生日" prop="birth">
                 <template slot-scope="scope">
@@ -51,15 +51,15 @@
         <el-dialog :visible.sync="dialogVisible" width="450px" @closed="closeHandler">
             <el-form :model="form" ref="form" :rules="rules">
                 <el-form-item prop="accountId" label="登录账号">
-                    <el-input v-model="form.accountId" :disabled="!!form.userId" placeholder="请输入登录账号"></el-input>
+                    <el-input v-model="form.accountId" :disabled="!!form.employId" placeholder="请输入登录账号"></el-input>
                 </el-form-item>
 
-                <el-form-item prop="password" label="登录密码" v-if="!form.userId">
+                <el-form-item prop="password" label="登录密码" v-if="!form.employId">
                     <el-input v-model="form.password" placeholder="请输入登录密码"></el-input>
                 </el-form-item>
 
-                <el-form-item prop="userName" label="员工姓名">
-                    <el-input v-model="form.userName" placeholder="请输入员工姓名"></el-input>
+                <el-form-item prop="employName" label="员工姓名">
+                    <el-input v-model="form.employName" placeholder="请输入员工姓名"></el-input>
                 </el-form-item>
 
                 <el-form-item prop="storeRole" label="员工角色">
@@ -115,15 +115,15 @@ export default {
                 total: 0
             },
             searchForm: {
-                userName: '',
+                employName: '',
                 storeRole: ''
             },
             dialogVisible: false,
             form: {
-                userId: '',
+                employId: '',
                 accountId: '',
                 password: '',
-                userName: '',
+                employName: '',
                 nickName: '',
                 birth: '',
                 sex: '',
@@ -136,7 +136,7 @@ export default {
                 password: [
                     { required: true, message: '请填写登录密码', trigger: 'blur' }
                 ],
-                userName: [
+                employName: [
                     { required: true, message: '请填写员工姓名', trigger: 'blur' }
                 ],
                 storeRole: [
@@ -179,7 +179,7 @@ export default {
         async getEmployList () {
             this.isLoading = true
             const response = await this.getEmployListX({
-                userName: this.searchForm.userName,
+                employName: this.searchForm.employName,
                 pageSize: this.pagination.pageSize,
                 pageNum: this.pagination.pageNum
             })
@@ -206,10 +206,10 @@ export default {
 
         // 修改员工
         editOps (row) {
-            this.form.userId = row.userId
+            this.form.employId = row.employId
             this.form.accountId = row.accountId
             this.form.password = row.password
-            this.form.userName = row.userName
+            this.form.employName = row.employName
             this.form.nickName = row.nickName
             this.form.birth = row.birth
             this.form.sex = row.sex
@@ -223,7 +223,7 @@ export default {
             if (!validate) return
             const params = Object.assign({}, this.form,  { password: this.$encrypt(this.form.password), birth: this.form.birth || undefined })
             let response
-            if (this.form.userId) {
+            if (this.form.employId) {
                 response = await this.updateEmployX(params)
             } else {
                 response = await this.createEmployX(params)
@@ -247,7 +247,7 @@ export default {
                 type: 'warning'
             })
             if (!confirm) return
-            const response = await this.removeEmployX({ userId: row.userId })
+            const response = await this.removeEmployX({ employId: row.employId })
             if (response.code === 200) {
                 this.dialogVisible = false
                 this.getEmployList()
@@ -267,7 +267,7 @@ export default {
                 type: 'warning'
             })
             if (!confirm) return
-            const response = await this.resetEmployX({ userId: row.userId })
+            const response = await this.resetEmployX({ employId: row.employId })
             if (response.code === 200) {
                 this.dialogVisible = false
                 this.getEmployList()
@@ -280,10 +280,10 @@ export default {
         },
 
         resetForm () {
-            this.form.userId = ''
+            this.form.employId = ''
             this.form.accountId = ''
             this.form.password = ''
-            this.form.userName = ''
+            this.form.employName = ''
             this.form.nickName = ''
             this.form.birth = ''
             this.form.sex = ''

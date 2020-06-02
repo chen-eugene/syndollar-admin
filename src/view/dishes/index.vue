@@ -100,7 +100,7 @@ export default {
                 total: 0
             },
             searchForm: {
-                userName: '',
+                employName: '',
                 storeRole: ''
             },
             discountVisible: false,
@@ -128,7 +128,7 @@ export default {
         async getDishesList () {
             this.isLoading = true
             const response = await this.getDishesListX({
-                userName: this.searchForm.userName,
+                employName: this.searchForm.employName,
                 pageSize: this.pagination.pageSize,
                 pageNum: this.pagination.pageNum
             })

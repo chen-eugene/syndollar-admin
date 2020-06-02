@@ -12,7 +12,7 @@ axios.defaults.baseURL = '/api/v1/admin'
 // 添加一个响应拦截器
 axios.interceptors.response.use(
     function (res) {
-        if (res.data.code === 100000000) {
+        if (res.data.code === 401) {
             $vm.$message({
                 type: 'error',
                 message: '登录已过期，请重新登录'

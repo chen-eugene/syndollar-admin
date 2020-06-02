@@ -4,7 +4,7 @@
       <transition name="logo" v-if="!isCollapse">
         <div class="header-logo">
           <div class="title">
-              SYNDOLLAR
+            SYNDOLLAR
           </div>
         </div>
       </transition>
@@ -12,7 +12,10 @@
       <a class="header-btn" @click="toggleMenu"><i :class="!isCollapse ? 'el-icon-s-fold' : 'el-icon-s-unfold'"></i></a>
 
       <div class="header-right">
-        <a class="header-btn fl"><i class="iconfont el-icon-user-solid"></i></a>
+        <a class="header-btn fl">
+          <i class="iconfont el-icon-user-solid"></i>
+          <span>{{ userInfo.employName }}</span>
+        </a>
         <a class="header-btn fl" @click="logout"><i class="iconfont icon-off"></i></a>
         <span class="mr20 fl"></span>
       </div>
@@ -37,6 +40,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import MenuItem from '@/components/MenuItem'
 import menu from './assets/json/menu'
 
@@ -48,7 +52,9 @@ export default {
   },
 
   computed: {
-
+    ...mapState('user', {
+      userInfo: state => state.userInfo || {}
+    }),
 
     menuData () {
       return [menu.employ, menu.dishes]
@@ -58,7 +64,7 @@ export default {
   data () {
     return {
       isCollapse: false,
-      activdMenu: '',
+      activdMenu: ''
     }
   },
 
@@ -73,9 +79,12 @@ export default {
   },
 
   created () {
+    this.getUserInfoX()
   },
 
   methods: {
+    ...mapActions('user', ['getUserInfoX']),
+
     toggleMenu () {
       this.isCollapse = !this.isCollapse
     },
@@ -130,6 +139,7 @@ export default {
         display: inline-block;
         padding: 0 20px;
         height: 60px;
+        line-height: 60px;
         color: $neut2;
 
         &:hover {
@@ -139,6 +149,12 @@ export default {
         i{
           font-size: 20px;
           line-height: 60px;
+          position: relative;
+          top: 2px;
+        }
+
+        span {
+          margin-left: 3px;
         }
       }
 

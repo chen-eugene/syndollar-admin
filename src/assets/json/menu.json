@@ -11,7 +11,7 @@
         "type": "item",
         "parentCode": "",
         "menuCode": "dishes",
-        "menuName": "菜谱管理",
+        "menuName": "食谱管理",
         "menuIcon": "el-icon-dish",
         "subMenus": []
     }
