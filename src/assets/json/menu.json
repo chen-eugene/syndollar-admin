@@ -1,5 +1,5 @@
-{
-    "employ": {
+[
+    {
         "type": "item",
         "parentCode": "",
         "menuCode": "employ",
@@ -7,12 +7,20 @@
         "menuIcon": "el-icon-s-custom",
         "subMenus": []
     },
-    "dishes": {
+    {
         "type": "item",
         "parentCode": "",
         "menuCode": "dishes",
-        "menuName": "食谱管理",
+        "menuName": "菜单管理",
         "menuIcon": "el-icon-dish",
         "subMenus": []
+    },
+    {
+        "type": "item",
+        "parentCode": "",
+        "menuCode": "order",
+        "menuName": "订单",
+        "menuIcon": "el-icon-s-order",
+        "subMenus": []
     }
-}
+]

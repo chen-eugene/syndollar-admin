@@ -17,7 +17,7 @@ export default {
 
     actions: {
         async userLoginX ({ commit }, params) {
-            const response = await axios.post('/login', params)
+            const response = await axios.post('admin/login', params)
             if (response.code === 200) {
                 commit('setUserInfo', response.data.userInfo)
                 return response
@@ -25,7 +25,7 @@ export default {
         },
 
         async getUserInfoX ({ commit }) {
-            const userInfo = getKey('userInfo')
+            const userInfo = getKey('employ/userInfo')
             if (!isEmptyObject(userInfo)) {
                 commit('setUserInfo', userInfo)
             }

@@ -57,7 +57,7 @@ export default {
     }),
 
     menuData () {
-      return [menu.employ, menu.dishes]
+      return menu
     }
   },
 
@@ -189,7 +189,7 @@ export default {
               color: $neut4;
             }
           }
-          
+
           &:hover {
             background-color: $primary;
             color: $neut4;

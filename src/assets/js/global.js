@@ -1,5 +1,8 @@
 import { formatDate, formatMoney, getCookie, deleteCookie, addCookie, getKey, setKey, removeKey, encrypt } from './utils'
 
+// 全局组件
+import components from '@/components'
+
 export default {
     install (Vue) {
         Vue.filter('currency', formatMoney)
@@ -33,6 +36,11 @@ export default {
             set: setKey,
             get: getKey,
             remove: removeKey
+        }
+
+        // 注册全局组件
+        for (let key of Object.keys(components)) {
+            Vue.component(components[key].name, components[key])
         }
     }
 }

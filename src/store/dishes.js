@@ -3,34 +3,42 @@ import axios from '../assets/js/axios'
 export default {
     namespaced: true,
 
-    state: {
+    state: {},
 
-    },
-
-    mutations: {
-
-    },
+    mutations: {},
 
     actions: {
-        async getDishesListX (store, params) {
-            const response = await axios.get('/dishes/list', { params })
-            return response
+        async getDishesListX(store, params) {
+            return await axios.get('/dishes/list', {
+                params: {
+                    ...params
+                }
+            })
         },
 
-        createDishesX (store, params) {
+        createDishesX(store, params) {
             return axios.post('/dishes/create', params)
         },
 
-        discountDishesX (store, params) {
+        editDishesX(store, params) {
+            return axios.post('/dishes/edit', params)
+        },
+
+        discountDishesX(store, params) {
             return axios.post('/dishes/discount', params)
         },
 
-        soldoutDishesX (store, params) {
+        soldoutDishesX(store, params) {
             return axios.post('/dishes/soldout', params)
         },
 
-        removeDishesX (store, params) {
-            return axios.post('/dishes/remove', params)
+        queryDishesX(store, params) {
+            return axios.get('/dishes/queryDishes', {
+                params: {
+                    ...params
+                }
+            })
         }
+
     }
 }

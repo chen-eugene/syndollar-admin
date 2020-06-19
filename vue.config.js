@@ -9,7 +9,7 @@ module.exports = {
         disableHostCheck: true,
 
         proxy: {
-            '/api/v1/admin': {
+            '/api/v1': {
                 target: 'http://127.0.0.1:7001'
             }
         }
@@ -54,7 +54,7 @@ module.exports = {
         // 为axios引用设置别名
         config.resolve.alias
             .set('@axios', path.resolve(__dirname, './src/assets/js/axios'))
-        
+
         // 全局scss混入
         const oneOfsMap = config.module.rule('scss').oneOfs.store
         oneOfsMap.forEach(item => {
