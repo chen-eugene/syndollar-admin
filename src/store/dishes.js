@@ -20,6 +20,10 @@ export default {
             return axios.post('/dishes/create', params)
         },
 
+        deleteDishesX(store, params) {
+            return axios.post('/dishes/remove', params)
+        },
+
         editDishesX(store, params) {
             return axios.post('/dishes/edit', params)
         },

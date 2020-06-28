@@ -7,12 +7,12 @@
                         <el-input v-model="form.categoryName" placeholder="请输入"></el-input>
                     </el-form-item>
                     <el-form-item prop="tag" label="标签">
-                        <el-select v-model="form.tag" multiple placeholder="请选择" style="width: 100%">
+                        <el-select v-model="form.tag" placeholder="请选择" style="width: 100%">
                             <el-option
                                     v-for="item in tagList"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value">
+                                    :key="item"
+                                    :label="item"
+                                    :value="item">
                             </el-option>
                         </el-select>
                     </el-form-item>
@@ -91,7 +91,7 @@
 
 
                 storeList: [],
-                tagList: [],
+                tagList: ['店长推荐', '上新', '限时折扣'],
 
             }
         },
@@ -156,7 +156,7 @@
                     const validate = await this.$refs['form'].validate()
                     if (!validate) return
                     const params = Object.assign({}, this.form, {
-                        tag: this.form.tag.join(',')
+                        tag: this.form.tag
                     })
                     const response = await this.createCategoryX(params)
                     if (response.code === 200) {

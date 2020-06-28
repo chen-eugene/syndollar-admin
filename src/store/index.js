@@ -4,6 +4,7 @@ import user from './user'
 import employ from './employ'
 import dishes from './dishes'
 import category from './category'
+import order from './order'
 
 Vue.use(Vuex)
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
         user,
         employ,
         dishes,
-        category
+        category,
+        order
     }
 })

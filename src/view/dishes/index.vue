@@ -26,7 +26,8 @@
                             <div class="dishes-aside">
                                 <div class="dishes-name">
                                     {{ item.dishesName }}
-                                    <el-tag type="info" v-if="item.soldOut" size="small">已售罄</el-tag>
+                                    <el-tag type="info" v-if="item.soldOut" size="mini">已售罄</el-tag>
+                                    <el-tag type="danger" v-if="item.tag" size="mini">{{item.tag}}</el-tag>
                                 </div>
 
                                 <div class="dishes-price">
@@ -55,6 +56,10 @@
 
                                     <el-tooltip class="item" effect="dark" content="编辑" placement="top">
                                         <i class="el-icon-setting success" @click="dishesEdit(item)"></i>
+                                    </el-tooltip>
+
+                                    <el-tooltip class="item" effect="dark" content="删除" placement="top">
+                                        <i class="el-icon-delete error" @click="deleteDishes(item)"></i>
                                     </el-tooltip>
                                 </div>
                             </div>
@@ -147,7 +152,7 @@
             }
         },
         methods: {
-            ...mapActions('dishes', ['getDishesListX', 'discountDishesX', 'soldoutDishesX']),
+            ...mapActions('dishes', ['getDishesListX', 'discountDishesX', 'soldoutDishesX', 'deleteDishesX']),
             ...mapActions('category', ['GET_CATEGORY_LIST']),
 
             search() {
@@ -248,9 +253,29 @@
                 this.$router.push({
                     path: '/dishes/create',
                     query: {
-                        dishes: item
+                        ...item
                     }
                 })
+            },
+
+            async deleteDishes(item) {
+                await this.$confirm('真的要删除吗???')
+                    .then(async _ => {
+                        const params = {
+                            dishesId: item.dishesId
+                        }
+                        const res = await this.deleteDishesX(params)
+                        if (res.code === 200) {
+                            this.dishesList = res.data.list
+                            this.pagination.total = res.data.total
+                        } else {
+                            this.$message({
+                                type: 'error',
+                                message: res.msg
+                            })
+                        }
+                    })
+                    .catch(_ => {})
             },
 
             onTabChange() {
@@ -280,6 +305,7 @@
                     float: left;
                     margin-left: 20px;
                     margin-top: 20px;
+                    position: relative;
 
                     .dishes-preview {
                         height: 240px;

@@ -4,7 +4,7 @@
       <transition name="logo" v-if="!isCollapse">
         <div class="header-logo">
           <div class="title">
-            SYNDOLLAR
+            百井居
           </div>
         </div>
       </transition>
@@ -211,6 +211,7 @@ export default {
       position: relative;
       padding: 15px;
       background-color: $neut4;
+      min-width: 1400px;
     }
   }
 </style>

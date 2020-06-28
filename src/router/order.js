@@ -2,7 +2,7 @@ const routes = [
     {
         path: '/order',
         name: 'order',
-        component: () => import('../view/dishes')
+        component: () => import('../view/order')
     }
 ]
 

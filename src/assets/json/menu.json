@@ -19,7 +19,7 @@
         "type": "item",
         "parentCode": "",
         "menuCode": "order",
-        "menuName": "订单",
+        "menuName": "订单管理",
         "menuIcon": "el-icon-s-order",
         "subMenus": []
     }

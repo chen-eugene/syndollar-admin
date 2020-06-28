@@ -49,7 +49,8 @@
                     <el-row :gutter="40">
                         <el-col :span="12">
                             <el-form-item prop="specification" label="规格">
-                                <el-select v-model="form.specification" clearable multiple placeholder="请选择" style="width: 100%">
+                                <el-select v-model="form.specification" clearable multiple placeholder="请选择"
+                                           style="width: 100%">
                                     <el-option
                                             v-for="item in config.specification"
                                             :key="item.value"
@@ -61,7 +62,8 @@
                         </el-col>
                         <el-col :span="12">
                             <el-form-item prop="temperature" label="温度">
-                                <el-select v-model="form.temperature" clearable multiple placeholder="请选择" style="width: 100%">
+                                <el-select v-model="form.temperature" clearable multiple placeholder="请选择"
+                                           style="width: 100%">
                                     <el-option
                                             v-for="item in config.temperature"
                                             :key="item.value"
@@ -75,7 +77,8 @@
                     <el-row :gutter="40">
                         <el-col :span="12">
                             <el-form-item prop="sugar" label="糖度">
-                                <el-select v-model="form.sugar" clearable multiple placeholder="请选择" style="width: 100%">
+                                <el-select v-model="form.sugar" clearable multiple placeholder="请选择"
+                                           style="width: 100%">
                                     <el-option
                                             v-for="item in config.sugar"
                                             :key="item.value"
@@ -87,7 +90,8 @@
                         </el-col>
                         <el-col :span="12">
                             <el-form-item prop="cream" label="奶油">
-                                <el-select v-model="form.cream" clearable multiple placeholder="请选择" style="width: 100%">
+                                <el-select v-model="form.cream" clearable multiple placeholder="请选择"
+                                           style="width: 100%">
                                     <el-option
                                             v-for="item in config.cream"
                                             :key="item.value"
@@ -101,12 +105,12 @@
 
 
                     <el-form-item prop="tag" label="标签">
-                        <el-select v-model="form.tag" multiple placeholder="请选择" style="width: 100%">
+                        <el-select v-model="form.tag" placeholder="请选择" style="width: 100%">
                             <el-option
                                     v-for="item in tagList"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value">
+                                    :key="item"
+                                    :label="item"
+                                    :value="item">
                             </el-option>
                         </el-select>
                     </el-form-item>
@@ -201,19 +205,19 @@
                     }]
                 },
                 form: {
-                    dishesName: '',
-                    englishName: '',
-                    primePrice: '',
-                    soldPrice: '',
-                    inventory: '',
+                    dishesName: this.$route.query.dishesName,
+                    englishName: this.$route.query.englishName,
+                    primePrice: this.$route.query.primePrice,
+                    soldPrice: this.$route.query.soldPrice,
+                    inventory: this.$route.query.inventory,
                     specification: [],
                     temperature: [],
                     sugar: [],
                     cream: [],
                     dishesImage: '',
-                    description: '',
+                    description: this.$route.query.description,
                     category: [],
-                    tag: ''
+                    tag: this.$route.query.tag
                 },
                 rules: {
                     dishesName: [{required: true, message: '请输入菜品名称', trigger: 'blur'}],
@@ -231,7 +235,7 @@
                 option: {
                     img: '' // 裁剪图片的地址
                 },
-                tagList: []
+                tagList: ['新品上市', '热卖', '限时折扣']
             }
         },
         computed: {
@@ -258,7 +262,7 @@
                     })
                 }
                 return []
-            }
+            },
         },
         methods: {
             ...mapActions('dishes', ['createDishesX', 'editDishesX']),
@@ -325,7 +329,7 @@
                         primePrice: Number(this.form.primePrice),
                         inventory: Number(this.form.inventory),
                         category: this.form.category.join(','),
-                        tag: this.form.tag.join(','),
+                        tag: this.form.tag,
                         specification: this.form.specification.join(','),
                         temperature: this.form.temperature.join(','),
                         sugar: this.form.sugar.join(','),
@@ -333,7 +337,7 @@
                     })
 
                     let response
-                    if (this.$route.query.dishes) {
+                    if (this.$route.query.dishesId) {
                         const p = Object.assign({}, this.$route.query, params)
                         response = await this.editDishesX(p)
                     } else {
@@ -356,12 +360,23 @@
                     console.log(exp)
                 }
             },
+
+            resolveParams(params){
+                if (params) {
+                    return params.split(',')
+                }
+                return []
+            }
         },
         created() {
-            console.dir(this.$route.query.dishes)
-            Object.assign(this.form, this.$route.query.dishes)
             this.form.category = this.mapCategory
+            this.form.specification = this.resolveParams(this.$route.query.specification)
+            this.form.temperature = this.resolveParams(this.$route.query.temperature)
+            this.form.sugar = this.resolveParams(this.$route.query.sugar)
+            this.form.cream = this.resolveParams(this.$route.query.cream)
             this.$set(this, 'fileList', this.mapDishesImage)
+            this.form.dishesImage = this.$route.query.dishesImage
+            console.log(this.$route.query)
         },
         mounted() {
             this.GET_CATEGORY_LIST()
