@@ -260,7 +260,7 @@
 
             async deleteDishes(item) {
                 await this.$confirm('真的要删除吗???')
-                    .then(async _ => {
+                    .then(async () => {
                         const params = {
                             dishesId: item.dishesId
                         }
@@ -275,7 +275,7 @@
                             })
                         }
                     })
-                    .catch(_ => {})
+                    .catch(() => {})
             },
 
             onTabChange() {
