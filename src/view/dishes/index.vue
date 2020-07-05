@@ -119,8 +119,8 @@
                 dishesList: [],
                 isLoading: false,
                 pagination: {
-                    pageSize: 15,
-                    pageNum: 0,
+                    pageSize: 16,
+                    pageNum: 1,
                     total: 0
                 },
                 discountVisible: false,
@@ -279,6 +279,7 @@
             },
 
             onTabChange() {
+                this.pagination = this.$options.data().pagination
                 this.getDishesList()
             }
         },

@@ -221,6 +221,7 @@
                 },
                 rules: {
                     dishesName: [{required: true, message: '请输入菜品名称', trigger: 'blur'}],
+                    englishName: [{required: true, message: '请输入菜品英文名称', trigger: 'blur'}],
                     soldPrice: [{required: true, message: '请输入售价', trigger: 'blur'}],
                     dishesImage: [{required: true, message: '请上传菜品图片', trigger: 'change'}],
                     category: [{required: true, message: '请选择分类', trigger: 'change'}],

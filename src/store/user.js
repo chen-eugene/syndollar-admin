@@ -25,7 +25,7 @@ export default {
         },
 
         async getUserInfoX ({ commit }) {
-            const userInfo = getKey('employ/userInfo')
+            const userInfo = getKey('userInfo')
             if (!isEmptyObject(userInfo)) {
                 commit('setUserInfo', userInfo)
             }

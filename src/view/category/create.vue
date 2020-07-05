@@ -97,7 +97,7 @@
         },
 
         methods: {
-            ...mapActions('dishes', ['createCategoryX']),
+            ...mapActions('category', ['createCategoryX']),
 
             changeHanlder(file) {
                 const isLt5M = file.size / 1024 / 1024 < 5

@@ -48,11 +48,15 @@
 
     export default {
         name: 'App',
-
         components: {
             MenuItem
         },
-
+        data() {
+            return {
+                isCollapse: false,
+                activdMenu: ''
+            }
+        },
         computed: {
             ...mapState('user', {
                 userInfo: state => state.userInfo || {}
@@ -69,13 +73,6 @@
             }
         },
 
-        data() {
-            return {
-                isCollapse: false,
-                activdMenu: ''
-            }
-        },
-
         watch: {
             $route(to) {
                 if (to.meta.menuIndex) {
@@ -85,12 +82,6 @@
                 }
             }
         },
-
-        created() {
-            this.getUserInfoX()
-            console.dir(this.userInfo)
-        },
-
         methods: {
             ...mapActions('user', ['getUserInfoX']),
 
@@ -106,6 +97,9 @@
             logout() {
                 this.$router.replace('/user/login')
             }
+        },
+        created() {
+            this.getUserInfoX()
         }
     }
 </script>
